@@ -4,7 +4,9 @@ namespace Core;
 
 class Route{
 
-    private $routes = [];
+    private $url;
+    private $controller;
+    private $action;
     
     public function __construct($url, $controller, $action){
         $this->url = $url;
