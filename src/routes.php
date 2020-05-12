@@ -4,7 +4,7 @@ use Core\Router;
 
 
 
-Router::get('/', 'Home', 'getPage');
+Router::get('/', 'Home', 'addPage');
 
 Router::get('/user','User','addPage');
 

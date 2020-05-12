@@ -3,16 +3,15 @@
 namespace Core;
 
 use Core\View;
+use Core\Page;
 
 abstract class Controller{
 
-    protected $page;
+    protected $title = null;
 
-    protected function view(){
-        return new View;
+    protected function view($page, $data = null){
+        return (new View())->renderPage(new Page($page, $data, $this->title));
     }
-    public function getPage(){
-        return $this->page;
-    }
+    
 
 }

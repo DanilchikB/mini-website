@@ -11,7 +11,11 @@ class Router{
 
 
     public static function get(string $url, string $controller, string $action) : void{
-            self::$Router[] = new Route($url, $controller, $action);
+            self::$Router[] = new Route($url, $controller, $action, 'GET');
+    }
+
+    public static function post(string $url, string $controller, string $action){
+        self::$Router[] = new Route($url, $controller, $action, 'POST');
     }
     
     public static function getRouter() : array{

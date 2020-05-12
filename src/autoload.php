@@ -1,7 +1,6 @@
 <?php
 
 spl_autoload_register(function($class) {
-    echo $class;
     $dir = __DIR__ . '/' .str_replace('\\', '/', $class) . '.php';
     if(!file_exists($dir)){
         $dirArr = explode('\\', $class);
@@ -12,7 +11,7 @@ spl_autoload_register(function($class) {
         $dir = __DIR__. '/' . $class . '.php';
     }
     
-
+    //echo $dir.'<br>';
 
     require $dir;
 });
