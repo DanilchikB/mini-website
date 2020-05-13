@@ -8,22 +8,13 @@ use Core\Route;
 
 class TestRouter extends TestCase
 {
-    public function testGetVariablesInRequestAndPartsUrl(){
-        $class = new ReflectionClass('Core\Router');
-        $method = $class->getMethod('getVariablesInRequestAndPartsUrl');
-        $method->setAccessible(true);
-
-        $result = $method->invoke(null, '/a/a/b');
-        //var_dump($result);
-        $this->assertEquals($result['partsUrl'],['a', 'a', 'b']);
-    }
 
     public function testCheckRoute(){
         $class = new ReflectionClass('Core\Router');
         $method = $class->getMethod('CheckRoute');
         $method->setAccessible(true);
 
-        $result = $method->invoke(null, ['a', 'a','b', 'c'], ['a', null, 'b', null]);
+        $result = $method->invoke(null, ['a', 'a','b', 'c'], ['a', '$a', 'b', '$']);
         $this->assertTrue($result);
 
     }

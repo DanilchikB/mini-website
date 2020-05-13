@@ -5,8 +5,9 @@ namespace App\Controllers;
 use Core\Controller;
 
 class HomeController extends Controller{
-    public function addPage($data ){
+    public function addPage($d,$a){
 
+        $this->title = 'test';
         
 
 

@@ -14,7 +14,7 @@
 
     $url=explode('?', $_SERVER['REQUEST_URI']);
 
-    echo $url[0];
+    //echo $url[0];
     
     $nowRoute = Router::getNeededRoute($url[0]);
     $service = new PageService();
@@ -26,11 +26,12 @@
         }elseif($nowRoute->request == 'POST'){
             $data = $_POST;
         }
-        $result = $service->getNeededPage($nowRoute, $data);
-        if($result!=null){
-            echo $result;
-        }
     }
+    $result = $service->getNeededPage($nowRoute, $data);
+    if($result!=null){
+        echo $result;
+    }
+    
     
     //echo $_SERVER['DOCUMENT_ROOT'];
 

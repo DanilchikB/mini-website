@@ -18,7 +18,7 @@ class PageService{
             $nameController = 'App\\Controllers\\' . $route->controller . 'Controller';
             $controller = new $nameController;
             if(method_exists($controller, $route->action)){
-                return $controller->{$route->action}($inputData);
+                return $controller->{$route->action}($inputData, $route->variablesInRequest);
             }else{
                 return "Нет такого метода";
             }

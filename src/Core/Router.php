@@ -15,24 +15,14 @@ class Router{
                                string $controller, 
                                string $action ) : void{
 
-            $partsUrl['partsUrl'] = [];
-            $partsUrl['variables'] = [];
+        $partsUrl = explode('/',$url);
+        $partsUrl = Helpers::removeElementFromArray($partsUrl);
 
-            if(Helpers::checkCharacterInString($url, '$')){
-                $partsUrl = self::getVariablesInRequestAndPartsUrl($url);
-            }else{
-                $partsUrl['partsUrl'] = explode('/',$url);
-                $partsUrl['partsUrl'] = Helpers::removeElementFromArray($partsUrl['partsUrl']);
-            }
-            if(count($partsUrl['variables']) == 0){
-                $partsUrl['variables'] = null;
-            }
-
-            self::$Routes[] = new Route($partsUrl['partsUrl'], 
+        self::$Routes[] = new Route(
+                $partsUrl, 
                 $controller, 
                 $action, 
-                'GET', 
-                $partsUrl['variables']);
+                'GET');
 
     }
 
@@ -51,20 +41,31 @@ class Router{
         $partsInputUrl = Helpers::removeElementFromArray($partsInputUrl);
         foreach(self::$Routes as $route){
             if(self::checkRoute($partsInputUrl, $route->url)){
+                self::addVariablesInRequest($route, $partsInputUrl);
                 return $route;
             }
 
         }
         return null;
     }
-
+    //передача переменных из url
+    private static function addVariablesInRequest(Route $route, array $partsUrl) : void{
+        for($i=0;$i < count($route->url); $i++){
+            if( $route->url[$i] == $partsUrl[$i]){
+                continue;
+            }else{
+                $key = str_replace('$', '', $route->url[$i]);
+                $route->setVariablesInRequest($key, $partsUrl[$i]);
+            }
+        }
+    }
     //проверить роутер
     private static function checkRoute(array $partsInputUrl, array $partsRouteUrl): bool {
         if(count($partsInputUrl)!=count($partsRouteUrl)){
             return false;
         }
         for($i = 0; $i < count($partsRouteUrl); $i++){
-            if($partsRouteUrl[$i] == null){
+            if(Helpers::checkCharacterInString($partsRouteUrl[$i], '$')){
                 continue;
             }
             if($partsRouteUrl[$i] != $partsInputUrl[$i]){
@@ -75,7 +76,7 @@ class Router{
     }
 
     //разграничение url и переменных
-    private static function getVariablesInRequestAndPartsUrl(string $url) : array{
+    /*private static function getVariablesInRequestAndPartsUrl(string $url) : array{
         $array['variables'] = [];
         $array['partsUrl'] = [];
         $partsUrl = explode('/',$url);
@@ -88,7 +89,7 @@ class Router{
             }
         }
         return $array;
-    }
+    }*/
 
     
 }

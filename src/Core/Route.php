@@ -7,7 +7,7 @@ class Route{
     private $url = [];
     private $controller;
     private $action;
-    private $variablesInRequest;
+    private $variablesInRequest=null;
     private $request;
     
     public function __construct(array $url, string $controller, string $action, string $request, ?array $var = null){
@@ -16,6 +16,9 @@ class Route{
         $this->action = $action;
         $this->request = $request;
         $this->variablesInRequest = $var;
+    }
+    public function setVariablesInRequest(string $key,string $value){
+        $this->variablesInRequest[$key]=$value;
     }
 
     public function __get($property)

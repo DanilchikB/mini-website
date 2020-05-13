@@ -7,9 +7,9 @@ use Core\Router;
 
 //Router::get('path', 'controller', 'action');
 
-Router::get('/', 'Home', 'addPage');
+Router::get('/home/', 'Home', 'addPage');
 
-Router::get('/user/$name','User','addPage');
+Router::get('/user/$name/$id','User','addPage');
 
 
 
