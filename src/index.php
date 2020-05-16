@@ -4,7 +4,7 @@
     ini_set('display_errors', 'on');
 
     require_once __DIR__.'/autoload.php';
-    require_once __DIR__.'/routes.php';
+    require_once __DIR__.'/app/routes/routes.php';
     
     use Core\Router;
     use Core\Route;
