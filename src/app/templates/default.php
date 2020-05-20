@@ -30,6 +30,7 @@
 
       </div>
       
-      
+      <script src="/libs/vue.js"></script>
+      <script src="/js/index.js"></script>
    </body>
 </html>

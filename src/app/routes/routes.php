@@ -10,9 +10,18 @@ use Core\Router;
 
 Router::get('/home/', 'Home', 'addPage');
 
-Router::get('/user/$name/$id','User','addPage');
+Router::get('/user/$name/$id', 'User', 'addPage');
 
 Router::get('/user/auth', 'User', 'auth');
+
+
+//Пользователи
+//регистрация 
+//get
+Router::get('/user/registration', 'User', 'formRegistration');
+//post
+Router::post('/check/registration', 'User', 'registration');
+Router::post('/check/login', 'User', 'checkLogin');
 
 
 
