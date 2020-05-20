@@ -15,21 +15,17 @@ class Router{
                                string $controller, 
                                string $action ) : void{
 
-        $partsUrl = explode('/',$url);
-        $partsUrl = Helpers::removeElementFromArray($partsUrl);
-
-        self::$Routes[] = new Route(
-                $partsUrl, 
-                $controller, 
-                $action, 
-                'GET');
+        self::formationRoute($url, $controller, $action, 'GET');
 
     }
 
     public static function post(string $url, string $controller, string $action){
-        $partsUrl = explode('/',$url);
-        $partsUrl = Helpers::removeElementFromArray($partsUrl);
-        self::$Routes[] = new Route($partsUrl, $controller, $action, 'POST');
+        self::formationRoute($url, $controller, $action, 'POST');
+    }
+
+    public static function json(string $url, string $controller, string $action){
+        
+        self::formationRoute($url, $controller, $action, 'REQUEST_BODY');
     }
     
     public static function getRoutes() : array{
@@ -47,6 +43,12 @@ class Router{
 
         }
         return null;
+    }
+    //Формирование роутера
+    private static function formationRoute(string $url, string $controller, string $action, string $request){
+        $partsUrl = explode('/',$url);
+        $partsUrl = Helpers::removeElementFromArray($partsUrl);
+        self::$Routes[] = new Route($partsUrl, $controller, $action, $request);
     }
     //передача переменных из url
     private static function addVariablesInRequest(Route $route, array $partsUrl) : void{
