@@ -13,7 +13,7 @@ class HomeController extends Controller{
         
 
 
-        return $this->View('index', 'asd');
+        return $this->view('index', 'asd');
     }
 
 }
