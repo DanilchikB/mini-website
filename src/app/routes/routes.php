@@ -21,7 +21,7 @@ Router::get('/user/auth', 'User', 'auth');
 Router::get('/user/registration', 'User', 'formRegistration');
 //post
 Router::post('/check/registration', 'User', 'registration');
-Router::post('/check/login', 'User', 'checkLogin');
+Router::json('/check/login', 'User', 'checkLogin');
 
 
 

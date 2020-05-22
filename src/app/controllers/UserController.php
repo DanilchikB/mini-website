@@ -19,12 +19,11 @@ class UserController extends Controller{
     //POST
     public function registration($data){
         $db = new UserModel();
-        $db->view();
+        $db -> registration($data);
     }
     //POST
     public function checkLogin($data){
-        $body = file_get_contents('php://input');
-        var_dump($body);
+
         $db=new UserModel();
         $result = $db->checkLogin($data['login']);
         return json_encode($result);

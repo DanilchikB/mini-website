@@ -81,20 +81,36 @@ a{
     color: #ff823a;
     background-color: white;
 }
+.message{
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+.success-message{
+
+    color: green;
+    font-size: 14px;
+}
+.error-message{
+    color: red;
+    font-size: 14px;
+}
 
 #registration{
-    text-align: center;
+    margin: 0 auto;
     margin-top: 10%;
+    width: 20%;
+    text-align: center;
 }
 
 
 
 #content{
-    flex-grow: 1;
     margin-right: 20px;
     margin-left: 20px;
+    flex-grow: 1;
     background-color: white;
     margin-bottom: 20px;
+    
 }
 
 #footer{
