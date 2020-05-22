@@ -6,6 +6,6 @@ use Core\Controller;
 
 class NotFoundController extends Controller{
     public function notFound(){
-        return 404;
+        return $this->view('NotFound');
     }
 }
