@@ -1,0 +1,40 @@
+version: "3.3"
+
+services:
+
+  nginx:
+    image: nginx:1.18.0-alpine
+    container_name: mini_website_nginx
+    volumes:
+      - ./docker/nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./src/app/public/:/usr/share/nginx/html/mini-website/src/app/public/
+    ports:
+      - "8080:80"
+    links:
+      - php-fpm
+    depends_on:
+      - php-fpm
+
+  php-fpm:
+    build: 
+      context: ./docker
+      dockerfile: php-fpm.Dockerfile
+    container_name: mini_website_php_fpm
+    volumes:
+      - ./src/:/usr/share/nginx/html/mini-website/src/
+    ports:
+      - "9000:9000"
+
+  postgresql:
+    build:
+      context: ./
+      dockerfile: ./docker/postgresql.Dockerfile
+    container_name: mini_website_postgresql
+    volumes: 
+      - ./database:/var/lib/postgresql/data
+    ports: 
+      - "5432:5432"
+
+
+
+

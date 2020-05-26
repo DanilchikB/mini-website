@@ -1,7 +1,7 @@
 <?php 
 
 return [
-    'host' => 'localhost',
+    'host' => 'postgresql',
     'port' => '5432',
     'dbname' => 'testdb',
     'user' => 'testuser',
