@@ -3,6 +3,7 @@
 namespace Core;
 
 use PDO;
+use PDOException;
 
 abstract class Model{
     private $connectData = null;
@@ -41,6 +42,25 @@ abstract class Model{
         }
         return false;
     }
+
+    protected function queryOneRowReturn(string $query, array $data){
+        if($query != '' || $query != null){
+            $result = $this->openAndCloseConnection(function() use ($query, $data){
+                    $preparation=$this->dbconnection->prepare($query);
+                    $preparation->execute($data);
+                    $result = $preparation->fetch(PDO::FETCH_ASSOC);
+                    $preparation = null;
+                    if(is_bool($result)){
+                        return null;
+                    }
+                    return $result;
+                }
+            );
+            return $result;
+        }
+        return null;
+    }
+
     //Закрытие и открытие базы данных
     protected function openAndCloseConnection($function){
         try {

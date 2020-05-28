@@ -12,7 +12,7 @@ Router::get('/home/', 'Home', 'addPage');
 
 Router::get('/user/$name/$id', 'User', 'addPage');
 
-Router::get('/user/auth', 'User', 'auth');
+
 
 
 //Пользователи
@@ -23,6 +23,13 @@ Router::get('/user/registration', 'User', 'formRegistration');
 Router::post('/check/registration', 'User', 'registration');
 Router::json('/check/login', 'User', 'checkLogin');
 
+//Авторизация
+
+Router::get('/user/auth', 'User', 'formAuthorization');
+Router::post('/check/authorization', 'User', 'authorization');
+Router::json('/check/user', 'User', 'checkUser');
+
+Router::get('/user', 'User', 'user');
 
 
 

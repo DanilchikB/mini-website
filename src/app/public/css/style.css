@@ -95,7 +95,7 @@ a{
     font-size: 14px;
 }
 
-#registration{
+#registration, #authorization{
     margin: 0 auto;
     margin-top: 10%;
     width: 20%;

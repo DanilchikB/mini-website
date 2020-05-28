@@ -73,7 +73,6 @@ var registration = new Vue({
             });
             if(response.ok){
                 let result = await response.json();
-                console.log(result);
                 if(!result){
                     this.loginMessage = '<div class = "success-message">Логин свободен</div>';
                     this.statusLogin = true;
@@ -101,4 +100,46 @@ var registration = new Vue({
             }
         }
     }
-})
+});
+
+var authorization = new Vue({
+    el: '#authorization-form',
+    data: {
+        login: null,
+        password: null,
+        message: null
+    },
+    methods:{
+        checkUser: async function() {
+
+            let response = await fetch('/check/user',{
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json;charset=utf-8'
+                },
+                body: JSON.stringify({login: this.login, password: this.password})
+            });
+            if(response.ok){
+                let result = await response.json();
+                if(result){
+                    this.message = null;
+                    this.$el.submit();
+                }else{
+                    this.message = '<div class = "error-message">Неверный логин или пароль</div>';
+                }
+            }else{
+                alert("Ошибка");
+            }
+        },
+        authorization: function(){
+            if(this.login === null || this.login === ''){
+                this.message = '<div class = "error-message">Введите логин!</div>'
+            }else if(this.password === null || this.password ===''){
+                this.message = '<div class = "error-message">Введите пароль!</div>'
+            }else{
+                this.checkUser();
+            }
+        }
+
+    }
+});

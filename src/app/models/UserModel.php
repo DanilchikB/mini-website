@@ -14,7 +14,9 @@ class UserModel extends Model{
 
     public function registration($data){
         if($this->checkRegistration($data)){
-            $result = $this->queryNoReturn('INSERT INTO users (login, password) VALUES (?, ?)', array($data['login'], $data['password']));
+            $result = $this->queryNoReturn('INSERT INTO users (login, password) VALUES (?, ?)', 
+                array($data['login'], 
+                password_hash($data['password'],PASSWORD_DEFAULT)));
             if($result){
                 header('Location: /user/auth');
             }else{
@@ -22,6 +24,20 @@ class UserModel extends Model{
             }
         }
     }
+
+    public function checkLoginAndPassword($data){
+        $result = $this->queryOneRowReturn('SELECT id, password FROM users WHERE login = ?', 
+            array($data['login']));
+        if($result !== null){
+            if(password_verify($data['password'],$result['password'])){
+                return $result['id'];
+            }else{
+                return null;
+            }
+        }
+        return $result;
+    }
+
     public function checkLogin(string $login):?bool{
         if($login===null){return null;}
         $result = $this->openAndCloseConnection(function() use ($login){
