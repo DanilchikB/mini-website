@@ -8,9 +8,9 @@ use Core\Router;
 
 //Router::get('path', 'controller', 'action');
 
-Router::get('/home/', 'Home', 'addPage');
+Router::get('/', 'Home', 'index');
 
-Router::get('/user/$name/$id', 'User', 'addPage');
+//Router::get('/user/$name/$id', 'User', 'addPage');
 
 
 

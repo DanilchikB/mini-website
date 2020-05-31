@@ -5,15 +5,15 @@ namespace App\Controllers;
 use Core\Controller;
 
 class HomeController extends Controller{
-    public function addPage($d,$a){
+    public function Index(){
 
-        $this->title = 'test';
+        $this->title = 'Hello!';
 
         
         
 
 
-        return $this->view('index', 'asd');
+        return $this->view('index');
     }
 
 }
