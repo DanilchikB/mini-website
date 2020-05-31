@@ -15,6 +15,7 @@ class View{
         if(file_exists($pagePath)) {
             ob_start();
                 if(gettype($page->data) == 'array'){
+                    $data = $page->data;
                     extract($data);
                 }
                 include $pagePath; 

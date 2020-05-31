@@ -1,5 +1,5 @@
 <?php
-
+    session_start();
     error_reporting(E_ALL);
     ini_set('display_errors', 'on');
 
@@ -22,7 +22,11 @@
 
     if($nowRoute != null){
         if($nowRoute->request == 'GET'){
-            $data = $_GET;
+            if($_GET){
+                $data = $_GET;
+            }else{
+                $data = null;
+            }
         }elseif($nowRoute->request == 'POST'){
             $data = $_POST;
         }elseif($nowRoute->request == 'REQUEST_BODY'){

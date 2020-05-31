@@ -4,12 +4,12 @@ namespace App\Models;
 use Core\Model;
 
 class UserModel extends Model{
-    public function view(){
-        $this->openAndCloseConnection(function(){
-            foreach($this->dbconnection->query('SELECT * from test') as $row) {
-                print_r($row);
-            }
-        });
+    
+
+    public function getLogin($id){
+        $result = $this->queryOneRowReturn('SELECT login FROM users WHERE id = ?', 
+            array($id));
+        return $result;
     }
 
     public function registration($data){

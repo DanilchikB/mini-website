@@ -9,19 +9,38 @@ use App\Models\UserModel;
 class UserController extends Controller{
 
     //GET
-    public function user(){
-        session_start([
-            'read_and_close' => true
-        ]);
+    public function user($request){
         if(empty($_SESSION['auth'])){
             header('Location: /user/auth');
         }
-        $this->title = 'user'.$_SESSION['id'];
-        return $this->view('user');
+        $db = new UserModel();
+        $id = $request['id'];
+        $error = null;
+        $login = null;
+        if(is_numeric($request['id'])){
+            $result = $db->getLogin($id);
+            if($result !== null){
+                $login = $result['login'];
+                $this->title = $login;
+            }else{
+                $error = "Нет такого пользователя";
+                $this->title = "Неизвестный пользователь";
+            }
+        }else{
+            $error = "id не должен быть строкой";
+            $this->title = "Неизвестный пользователь";
+        }
+        
+        return $this->view('user', array('username'=> $login,
+                                         'id'=> $id,
+                                         'error'=>$error));
     }
 
     //GET
     public function formAuthorization(){
+        if(!empty($_SESSION['auth'])){
+            header('Location: /user/'.$_SESSION['id']);
+        }
         $this->title = 'Авторизация';
         return $this->view('auth');
     }
@@ -30,6 +49,9 @@ class UserController extends Controller{
 
     //GET
     public function formRegistration(){
+        if(!empty($_SESSION['auth'])){
+            
+        }
         $this->title = 'Регистрация';
         return $this->view('registration');
     }
@@ -43,7 +65,6 @@ class UserController extends Controller{
 
     //POST
     public function authorization($data){
-        session_start();
         $db=new UserModel();
         $result = $db->checkLoginAndPassword($data);
         if($result === null){
@@ -51,9 +72,13 @@ class UserController extends Controller{
         }else{
             $_SESSION['auth'] = true;
             $_SESSION['id'] = $result;
-            header('Location: /user');
+            header('Location: /user/'.$result);
         }
-        session_write_close();
+    }
+    public function logout(){
+        $_SESSION['auth'] = null;
+        $_SESSION['id'] = null;
+        header('Location: /user/auth');
     }
 
     //POST

@@ -77,21 +77,6 @@ class Router{
         return true;
     }
 
-    //разграничение url и переменных
-    /*private static function getVariablesInRequestAndPartsUrl(string $url) : array{
-        $array['variables'] = [];
-        $array['partsUrl'] = [];
-        $partsUrl = explode('/',$url);
-        foreach($partsUrl as $part){
-            if(Helpers::checkCharacterInString($part, '$')){
-                $array['variables'][] = str_replace('$', '', $part);
-                $array['partsUrl'][] = null;
-            }else if($part != ''){
-                $array['partsUrl'][] = $part;
-            }
-        }
-        return $array;
-    }*/
 
     
 }

@@ -16,8 +16,12 @@
                <input class = "input-search">
                <a href = "" class = "button-search white">Поиск</a>
             </div>
-            <div class = "signin">
-               <a class = "white" href="">Войти</a>
+            <div class = "status-user">
+               <?php if(!empty($_SESSION['auth'])){ ?>
+                  <a class = "white" href="/user/logout">Выйти</a>
+               <?php }else{?>
+                  <a class = "white" href="/user/auth">Войти</a>
+               <?php }?>
             </div>
          </div>
       </div>
