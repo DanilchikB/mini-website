@@ -23,7 +23,7 @@ cd mini-website
 В проекте используется небольшая логика фронтенда. Для этого использован Vue.js.
 Поэтому для начала нужно скачать скрипт. Для этого можно исполозовать удобную консольную программу wget:
 ```
-wget -O ./src/app/public/libs/vue.js https://cdn.jsdelivr.net/npm/vue/dist/vue.js
+mkdir ./src/app/public/libs && wget -O ./src/app/public/libs/vue.js https://cdn.jsdelivr.net/npm/vue/dist/vue.js
 ```
 Ну или самостоятельно скачайте скрипт Vue в дерикорию ./src/app/public/libs/ с именем vue.js
 
